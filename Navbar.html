@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar
+    </title>
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <style>
+        /* Mobile specific tweaks */
+        @media (max-width: 959px) {
+
+            /* Make the Hero Text smaller so it fits on one line */
+            .uk-heading-medium {
+                font-size: 2rem !important;
+            }
+
+            /* Ensure the background image centers on the most important part */
+            .uk-slideshow-items img {
+                object-position: center center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <div class="uk-navbar-left">
+            <a class="uk-logo" href="index.html">Clear Sky</a>
+        </div>
+
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@m">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <a class="uk-navbar-toggle uk-hidden@m" uk-navbar-toggle-icon href="#offcanvas-menu" uk-toggle></a>
+        </div>
+    </nav>
+
+    <div id="offcanvas-menu" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar" style="background-color: #1B263B;">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Menu</li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="uk-position-relative uk-slideshow"
+        uk-slideshow="animation: kenburns; autoplay: true; min-height: 400; max-height: 100vh;">
+
+        <ul class="uk-slideshow-items" uk-height-viewport="offset-bottom: 10">
+            <li>
+                <img src="images/hero.jpg" alt="" uk-cover>
+            </li>
+        </ul>
+    </div>
+
+
+
+</body>
+
+</html>

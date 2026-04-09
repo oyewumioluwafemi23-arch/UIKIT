@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <style>
+        :root {
+            --stripe-blue: #635bff;
+            --stripe-dark: #0a2540;
+            --stripe-gray: #425466;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* 1. Glass Navbar */
+        .custom-nav {
+            background: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* 2. The Slanted Hero Section */
+        .hero-slant {
+            position: relative;
+            background: linear-gradient(150deg, rgb(95, 79, 172) 15%, #79e4fa 70%, #a6ffcb 94%);
+            padding: 160px 0 120px;
+            --stripe-dark: #0a2540;
+            /* This creates the Stripe tilt */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: -50px;
+        }
+
+        /* 1. Set the initial state and smooth speed */
+        .nav-chevron {
+            transition: transform 0.3s ease;
+            margin-left: 5px;
+        }
+
+        /* 2. Rotate when the dropdown is open (UIkit adds .uk-open automatically) */
+        .uk-open>a .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* 3. Optional: Rotate on hover if your dropdown is set to hover mode */
+        li:hover>a .nav-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* 3. Floating Card Style */
+        .stripe-card {
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+            box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07) !important;
+        }
+
+        /* 1. Force the dropdown to be wide and premium looking */
+        .stripe-mega-menu {
+            width: 900px !important;
+            /* Enough room for 4 columns */
+            padding: 40px !important;
+            border-radius: 12px !important;
+            box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25), 0 30px 60px -30px rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+            background: #ffffff !important;
+
+        }
+
+        /* 2. Style the headers (Payments, Developers, etc) */
+        .uk-nav-header {
+            font-weight: 700 !important;
+            font-size: 0.85rem !important;
+            letter-spacing: 1px;
+            margin-bottom: 10px !important;
+            text-transform: uppercase;
+            white-space: nowrap !important;
+        }
+
+        /* 3. Make sub-items big and add the Stripe 'hover' effect */
+        .mega-item {
+            font-size: 1rem !important;
+            color: #425466 !important;
+            /* Stripe Gray */
+            padding: 8px 0 !important;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .mega-item:hover {
+            color: var(--stripe-blue) !important;
+            transform: translateX(3px);
+            /* Subtle slide to the right */
+            background: transparent !important;
+            /* Remove default UIkit background */
+            text-decoration: none !important;
+        }
+
+        /* 4. Flip the chevron when hovering over the 'Products' item */
+        .mega-menu-trigger:hover .nav-chevron {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+
+        .stripe-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+        .btn-stripe {
+            background: var(--stripe-blue);
+            color: #0a2540;
+            border-radius: 5px;
+
+            text-transform: none;
+            font-weight: 600;
+            padding: 0 25px;
+
+        }
+
+        /* 1. The Header Container */
+        .stripe-mega-menu .uk-nav-header {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 15px !important;
+            display: block;
+            width: 100%;
+            color: #8898aa;
+            transition: color 0.3s ease;
+        }
+
+        /* 2. The Static Gray Background Line */
+        .stripe-mega-menu .uk-nav-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* 3. The Multi-Color Sliding Line */
+        .stripe-mega-menu .uk-nav-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            /* Slightly thicker to show off the colors */
+
+            /* THE MIXED COLOR GRADIENT */
+            background: linear-gradient(to right,
+                    #007cf0,
+                    /* Blue */
+                    #7928ca,
+                    /* Purple */
+                    #ff0080,
+                    /* (Transition to Orange/Yellow) */
+                    #ff4d4d,
+                    /* Orange */
+                    #f9cb28
+                    /* Yellow */
+                );
+
+            /* Animation Start State */
+            transform: scaleX(0);
+            transform-origin: bottom left;
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* 4. Trigger: Slide in when the Column or Header is hovered */
+        .uk-grid-large>div:hover .uk-nav-header::after,
+        .mega-sidebar:hover .uk-nav-header::after {
+            transform: scaleX(1);
+        }
+
+        /* 5. Change header text color to a dark blue on hover */
+        .uk-grid-large>div:hover .uk-nav-header,
+        .mega-sidebar:hover .uk-nav-header {
+            color: #0a2540 !important;
+        }
+
+        .stripe-mega-menu {
+            /* Increase this value to your preferred width */
+            width: 2000px !important;
+
+            /* Ensure it has enough padding so the 4 columns aren't squished */
+            padding: 35px !important;
+
+            /* Center it if it's not stretching to boundaries */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mega-sidebar {
+            /* This is the actual 'Line' */
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+            width: 370px !important;
+            /* This gives the sidebar that 'Explorer' background color */
+            background-color: #f9fbff;
+        }
+
+        /* Target the inner grid specifically */
+        .stripe-mega-menu .uk-grid-column-xlarge,
+        .stripe-mega-menu .uk-grid-large {
+            column-gap: 50px !important;
+            /* Increase this to push columns further apart */
+        }
+
+        /* Update these specific classes in your <style> block */
+
+        .mega-item-container {
+            display: flex !important;
+            /* Force Flexbox */
+            flex-direction: column !important;
+            /* Stack children vertically */
+            text-decoration: none !important;
+            padding: 12px 0;
+            transition: all 0.2s ease;
+
+        }
+
+        .link-title {
+            color: var(--stripe-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: block !important;
+            margin-bottom: 2px;
+            /* Space between title and description */
+        }
+
+        .link-description {
+            color: #6b7c93;
+            font-size: 0.85rem;
+            font-weight: 400;
+            display: block !important;
+            line-height: 1.4;
+            white-space: normal !important;
+            /* Allows wrapping if the text is long */
+        }
+
+        /* 2. HOVER STATES */
+
+        /* When the container is hovered, change the Top Text Color */
+        .mega-item-container:hover .link-title {
+            color: blue;
+            /* Different color on hover */
+        }
+
+        /* When the container is hovered, make the Bottom Text Bold */
+        .mega-item-container:hover .link-description {
+            font-weight: 700;
+            color: var(--stripe-dark);
+            /* Optional: darken it slightly so the bold pops */
+        }
+
+        /* Remove the static gray line and the sliding gradient line ONLY in the sidebar */
+        .mega-sidebar .uk-nav-header::before,
+        .mega-sidebar .uk-nav-header::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        /* Optional: Reset padding/margin for the sidebar header since the line is gone */
+        .mega-sidebar .uk-nav-header {
+            padding-bottom: 0 !important;
+            margin-bottom: 15px !important;
+            border: none !important;
+        }
+
+        .mega-sidebar .mega-item-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            /* Forces children to the left */
+            text-align: left !important;
+            /* Ensures text alignment */
+            padding-left: 0 !important;
+            /* Removes any accidental indentation */
+        }
+
+        .mega-sidebar .link-title,
+        .mega-sidebar .link-description {
+            width: 100%;
+            text-align: left !important;
+        }
+
+        /* 1. THE MASTER CONTAINER - This controls the scroll for EVERYTHING */
+        .stripe-mega-menu {
+            /* Define the window height */
+            max-height: 645px !important;
+
+            /* Enable the single scrollbar */
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+
+            /* Keep your existing styling */
+            width: 1800px !important;
+            padding: 0 !important;
+            /* Set to 0 so scrollbar stays on the far right edge */
+            border-radius: 12px !important;
+            background: #ffffff !important;
+            box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25) !important;
+        }
+
+        /* 2. CLEAN UP THE SIDEBAR - Remove its independent scroll */
+        .mega-sidebar {
+            border-left: 1px solid rgba(0, 0, 0, 0.07);
+            background-color: #f9fbff;
+            /* Ensure no internal scroll interferes */
+            max-height: none !important;
+            overflow: visible !important;
+        }
+
+        /* 3. THE PREMIUM SCROLLBAR STYLING */
+        .stripe-mega-menu::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .stripe-mega-menu::-webkit-scrollbar-track {
+            background: #f4f7f9;
+            /* Subtle light track */
+            border-radius: 0 12px 12px 0;
+        }
+
+        .stripe-mega-menu::-webkit-scrollbar-thumb {
+            background: #d0d7de;
+            /* Elegant gray thumb */
+            border-radius: 10px;
+            border: 2px solid #f4f7f9;
+            /* Creates a 'floating' effect */
+        }
+
+        .stripe-mega-menu::-webkit-scrollbar-thumb:hover {
+            background: var(--stripe-gray);
+            /* Turns blue on hover */
+        }
+
+
+        .mega-subnav .mega-item-container {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            /* Forces children to the left */
+            text-align: left !important;
+            /* Ensures text alignment */
+            padding-left: 0 !important;
+            /* Removes any accidental indentation */
+        }
+
+        .mega-subnav .link-title,
+        .mega-subnav .link-description {
+            width: 100%;
+            text-align: left !important;
+        }
+
+
+
+        /* --- NEW STATIC SUBNAV CLASSES --- */
+
+        .static-mega-wrapper {
+            width: 1200px !important;
+            padding: 0 !important;
+
+            border-radius: 5px !important;
+            background: #ffffff !important;
+            box-shadow: 0 50px 100px -20px rgba(50, 50, 93, 0.25) !important;
+            border: 1px solid rgba(0, 0, 0, 0.05) !important;
+            /* No max-height here, so no scrollbar will ever appear */
+        }
+
+        .static-main-section {
+
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            /* Forces children to the left */
+            text-align: left !important;
+            /* Ensures text alignment */
+            padding-left: 60px !important;
+            /* Removes any accidental indentation */
+        }
+
+
+        .static-main-section-1 {
+            border-right: 1px solid rgba(10, 10, 10, 0.07);
+            padding: 40px !important;
+        }
+
+        .static-main-section-2 {
+            border-right: 1px solid rgba(10, 10, 10, 0.07);
+            padding: 40px !important;
+        }
+
+        .static-main-section-3 {
+            padding: 40px !important;
+        }
+
+
+        .static-sidebar-section {
+            width: 280px !important;
+            background-color: #f6f9fc;
+            /* Slightly different gray for variety */
+            border-left: 1px solid rgba(0, 0, 0, 0.07);
+            padding: 40px !important;
+        }
+
+        /* Reusable link styles for the new section */
+        .static-link-box {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            text-decoration: none !important;
+            padding: 12px 0 !important;
+            transition: all 0.2s ease;
+        }
+
+        .static-link-box:hover .static-title {
+            color: blue;
+            transform: translateX(3px);
+        }
+
+        .static-link-box:hover .static-desc {
+            font-weight: 700;
+            color: var(--stripe-dark);
+            /* Optional: darken it slightly so the bold pops */
+        }
+
+        .static-title {
+            color: var(--stripe-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .static-desc {
+            color: #6b7c93;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container uk-navbar-transparent custom-nav" uk-navbar>
+            <div class="uk-navbar-left uk-margin-left">
+                <a class="uk-navbar-item uk-logo" href="#"
+                    style="color: var(--stripe-dark); font-weight: 800;">Stripe</a>
+                <ul class="uk-navbar-nav uk-visible@m">
+                    <li class="mega-menu-trigger">
+                        <a href="#" style="color: var(--stripe-dark);">
+                            Products <span class="nav-chevron" uk-icon="icon: chevron-down"></span>
+                        </a>
+
+                        <div class="uk-navbar-dropdown stripe-mega-menu"
+                            uk-dropdown="mode: hover; pos: bottom-justify; boundary: !nav; boundary-align: true; offset: 0; padding: 0">
+
+                            <div class="uk-grid-collapse uk-grid-match" uk-grid>
+
+                                <div class="uk-width-3-4@m ">
+                                    <div class="uk-padding-large">
+                                        <div class="uk-grid-large uk-child-width-1-5@m mega-subnav" uk-grid>
+                                            <div>
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header" style="color: var(--stripe-blue);">
+                                                        Payments
+                                                    </li>
+
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Payments</div>
+                                                            <div class="link-description">Online Payments
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title">Managed Payments</div>
+                                                            <div class="link-description">Merchants of record solution
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Payment Links</div>
+                                                            <div class="link-description">No code payment
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Checkout</div>
+                                                            <div class="link-description">Prebuild payment form
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Payments</div>
+                                                            <div class="link-description">Online Payments
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Payments</div>
+                                                            <div class="link-description">Online Payments
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Elements</div>
+                                                            <div class="link-description">Flexible UI components
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Payment Methods</div>
+                                                            <div class="link-description">Access to 100+
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Terminal</div>
+                                                            <div class="link-description">In-person payments
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Radar</div>
+                                                            <div class="link-description">Fraud Prevention
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header" style="color: var(--stripe-blue);">
+                                                        Revenue</li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title">Biling</div>
+                                                            <div class="link-description">Subscription management
+
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Usage based billing</div>
+                                                            <div class="link-description">Metered billing
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title">Invoicing</div>
+                                                            <div class="link-description">One-time or recurring
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Tax</div>
+                                                            <div class="link-description">Sales tax and VAT automation
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Revenue recognition</div>
+                                                            <div class="link-description">Account automation
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Stripe sigma</div>
+                                                            <div class="link-description">Custom reports
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title">Data pipeline</div>
+                                                            <div class="link-description">Data sync
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header" style="color: var(--stripe-blue);">
+                                                        Money Management
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Financial Account</div>
+                                                            <div class="link-description">Businesss Finances
+                                                            </div>
+                                                        </a>
+                                                    </li>
+
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Global Payouts</div>
+                                                            <div class="link-description">Payout to third parties
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title">Capital</div>
+                                                            <div class="link-description">Business financing
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Crypto</div>
+                                                            <div class="link-description">Wallet,stable coin issuing and
+                                                                card infastructure
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header" style="color: var(--stripe-blue);">
+                                                        Platforms and Market Places</li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Connect</div>
+                                                            <div class="link-description">Payment for platforms
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Capital for platforms</div>
+                                                            <div class="link-description">Customer financing
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Financial Accounts for platforms
+                                                            </div>
+                                                            <div class="link-description">Embedded financial services
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#" class="mega-item-container">
+                                                            <div class="link-title"> Issueing</div>
+                                                            <div class="link-description">Financial and virtual card
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-width-1-4@m mega-sidebar">
+                                    <div class="uk-padding-large">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <li class="uk-nav-header" style="color: var(--stripe-blue);">More</li>
+                                            <li><a href="#" class="mega-item-container">
+                                                    <div class="link-title">Atlas</div>
+                                                    <div class="link-description">Startup Incorporation</div>
+                                                </a>
+                                            </li>
+                                            <li><a href="#" class="mega-item-container">
+                                                    <div class="link-title">Climate</div>
+                                                    <div class="link-description">Carbon removal</div>
+                                                </a>
+                                            </li>
+                                            <li><a href="#" class="mega-item-container">
+                                                    <div class="link-title">Identity</div>
+                                                    <div class="link-description">Online identity erification</div>
+                                                </a>
+                                            </li>
+                                            <li><a href="#" class="mega-item-container">
+                                                    <div class="link-title">Financial Connection</div>
+                                                    <div class="link-description">Linked financial account data</div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <div class="uk-card uk-card-default">
+                                                <div class="uk-card-media-top">
+                                                    <img src="Images/Exam.jpg" width="1800" height="1100" alt=""
+                                                        style="border-radius: 5px;">
+                                                </div>
+                                                <div class="uk-card-body">
+                                                    <h3 class="uk-card-title">Join us at sessions</h3>
+                                                    <p>Register to attend our annual conference in San Francisco April
+                                                        29-30.
+                                                    </p>
+                                                    <Div><a href="#">Register Now</a></Div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="uk-parent">
+                        <a href="#" style="color: var(--stripe-dark);">
+                            Solutions <span class="nav-chevron" uk-icon="icon: chevron-down"></span>
+                        </a>
+
+                        <div class="uk-navbar-dropdown static-mega-wrapper"
+                            uk-dropdown="mode: hover; pos: bottom-justify; offset: 0;">
+
+                            <div class="uk-grid-collapse uk-grid-match" uk-grid>
+
+                                <div class="uk-width-expand">
+                                    <div class="static-main-section">
+                                        <div class="uk-grid-large uk-child-width-1-3@m" uk-grid>
+
+                                            <div class="static-main-section-1 ">
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header">By stages</li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Enterprises</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Start up</span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="static-main-section-2">
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header">SaaS</li>
+
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> By use case</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Agentic commerce</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Crypto</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Ecommerce</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Embedded finance</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Finance automation</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Global businesses</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">In-app payments</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Marketplaces</span>
+
+                                                        </a>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Platforms</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> SaaS</span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="static-main-section-3">
+                                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                    <li class="uk-nav-header"> By industry
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> AI companies</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Creator economy</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Hospitality, travel, and
+                                                                leisure</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Insurance</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Media and entertainment</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title"> Nonprofits</span>
+
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="static-link-box">
+                                                            <span class="static-title">Retail</span>
+
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="static-sidebar-section">
+                                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                                        <li class="uk-nav-header">Ecosystem</li>
+                                        <li>
+                                            <a href="#" class="static-link-box">
+                                                <span class="static-title"> Partners</span>
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="static-link-box">
+                                                <span class="static-title">Stripe App Marketplace</span>
+
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="mega-menu-trigger">
+                        <a href="#" style="color: var(--stripe-dark);">
+                            Developers <span class="nav-chevron" uk-icon="icon: chevron-down"></span>
+                        </a>
+                    </li>
+
+
+                    <li class="mega-menu-trigger">
+                        <a href="#" style="color: var(--stripe-dark);">
+                            Resources <span class="nav-chevron" uk-icon="icon: chevron-down"></span>
+                        </a>
+                    </li>
+                    <li><a href="#">Pricing </a></li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right uk-margin-right">
+
+                <div class="uk-navbar-item">
+                    <a href="#" class="uk-button btn-stripe"
+                        style="background-color: rgb(41, 70, 104); color: white;">Sign In</a>
+                </div>
+                <div class="uk-navbar-item">
+                    <a href="#" class="uk-button btn-stripe" style="background-color: whitesmoke;">
+                        <b>Contact Sales<span class=" uk-icon uk-margin-xsmall-right"
+                                uk-icon="icon: arrow-right"></span></b> </a>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="hero-slant">
+        <div class="uk-container">
+            <div class="uk-grid-medium" uk-grid>
+                <div class="uk-width-2-4@m">
+                    <p class="uk-heading-small " style="color: white;">Financial infrastructure to grow
+                        your revenue.
+                        <span style="color:var(--stripe-dark) ;">Accept payments, offer financial services, and
+                            implement custom revenue models—from your first transaction to your billionth.
+                    </p>
+                    </span>
+                    <div class="uk-margin-medium-top">
+                        <a href="#" class="uk-button btn-stripe"
+                            style="background: var(--stripe-dark); color: white;">Get started</a>
+                        <a href="#" class="uk-button btn-stripe uk-margin-left"
+                            style="border: 2px solid var(--stripe-dark); background-color: transparent;"><span
+                                class=" uk-icon uk-margin-xsmall-right" uk-icon="icon: google"></span>
+                            Sign up with Google
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-section uk-section-muted uk-padding-large">
+        <div class="uk-container">
+            <div class="uk-child-width-1-3@m uk-grid-match" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body stripe-card">
+                        <span uk-icon="icon: receiver; ratio: 1.5" style="color: var(--stripe-blue);"></span>
+                        <h3 class="uk-card-title uk-margin-small-top"
+                            style="color: var(--stripe-dark); font-weight: 700;">Global Payments</h3>
+                        <p>Accept payments and move money globally with Stripe’s powerful APIs.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body stripe-card">
+                        <span uk-icon="icon: code; ratio: 1.5" style="color: var(--stripe-blue);"></span>
+                        <h3 class="uk-card-title uk-margin-small-top"
+                            style="color: var(--stripe-dark); font-weight: 700;">Developer First</h3>
+                        <p>We believe in building tools that developers love, from documentation to CLI.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body stripe-card">
+                        <span uk-icon="icon: lock; ratio: 1.5" style="color: var(--stripe-blue);"></span>
+                        <h3 class="uk-card-title uk-margin-small-top"
+                            style="color: var(--stripe-dark); font-weight: 700;">Secure Infrastructure</h3>
+                        <p>World-class security and compliance built into every transaction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+
+
+</html>

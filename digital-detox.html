@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Why You Need a Digital Detox - The Clear Sky Journal</title>
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <style>
+        /* Consistent with Blog.html styles */
+        .uk-navbar-container {
+            background: rgba(27, 38, 59, 0.9) !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        /* 1. The Background of the sidebar */
+        .uk-offcanvas-bar {
+            background: #1B263B !important;
+            /* Your Deep Navy */
+            padding: 40px 30px;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 2. The Navigation Links */
+        .uk-offcanvas-bar .uk-nav-default>li>a {
+            color: #E0E1DD !important;
+            /* Your Ice Blue */
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            padding: 10px 0;
+        }
+
+        /* 3. The Hover & Active State */
+        .uk-offcanvas-bar .uk-nav-default>li>a:hover,
+        .uk-offcanvas-bar .uk-nav-default>li.uk-active>a {
+            color: #FFFFFF !important;
+            padding-left: 10px;
+            /* Subtle slide effect on hover */
+        }
+
+        /* 4. The Close Button (X icon) */
+        .uk-offcanvas-close {
+            color: #E0E1DD !important;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* 5. The Divider (If you use headers in your menu) */
+        .uk-offcanvas-bar .uk-nav-header {
+            color: rgba(224, 225, 222, 0.5) !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(224, 225, 222, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .uk-navbar-nav>li>a,
+        .uk-navbar-item,
+        .uk-navbar-item a,
+        .uk-logo {
+            color: #FFFFFF !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .uk-icon {
+            color: #FFFFFF !important;
+        }
+
+        .uk-navbar-sticky {
+            background: rgba(27, 38, 59, 0.8) !important;
+            backdrop-filter: blur(8px);
+        }
+
+        .uk-navbar-container .uk-navbar-container {
+            position: relative;
+            z-index: 999;
+            background: transparent !important;
+        }
+
+        .uk-card-media-top img {
+            transition: transform 0.5s ease;
+        }
+
+        .uk-card:hover .uk-card-media-top img {
+            transform: scale(1.1);
+        }
+
+        .uk-label {
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .article-content {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .article-content h2 {
+            color: #1B263B;
+            margin-top: 2rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container">
+            <div uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="Home.html" aria-label="Back to Home">
+                        <img src="Images/Clear_Sky-removebg-preview.png" alt="Company Name Logo"
+                            style="height: 90px; width: auto;">
+                    </a>
+                </div>
+                <div class="uk-navbar-center uk-visible@m">
+                    <div class="uk-navbar-item">
+                        <a href="#" uk-toggle="target: #my-sidebar">
+                            <span class="uk-icon uk-margin-xsmall-right" uk-icon="icon: star"></span>Features
+                        </a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Home.html">Home</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="About.html">About</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Home.html#our-services" uk-scroll>Our Services</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Blog.html">Blog</a>
+                    </div>
+
+                </div>
+                <!-- Mobile toggle -->
+                <div class="uk-navbar-right">
+                    <a class="uk-navbar-toggle uk-hidden@m" uk-toggle="target: #offcanvas-nav">
+                        <span uk-navbar-toggle-icon></span>
+                    </a>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div id="offcanvas-nav" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-default">
+                <li><a href="#" uk-toggle="target: #my-sidebar"><span class="uk-icon uk-margin-xsmall-right"
+                            uk-icon="icon: star"></span>Features</a></li>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Home.html#our-services" uk-scroll>Our Services</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="uk-section uk-section-muted uk-flex uk-flex-middle"
+        style="background: #E0E1DD; border-bottom: 1px solid #d1d2d0;">
+        <div class="uk-container uk-text-center">
+            <h1 class="uk-heading-small" style="color: #1B263B; font-weight: 800;">Why You Need a Digital Detox</h1>
+            <p class="uk-text-lead">Tips, stories, and science-backed advice for the modern student.</p>
+        </div>
+    </div>
+
+    <div class="uk-section uk-section-default">
+        <div class="uk-container">
+            <div class="uk-grid-large" uk-grid>
+                <div class="uk-width-2-3@m">
+                    <article class="article-content">
+                        <p><em>Published on March 27, 2026</em></p>
+                        <p>In our hyper-connected world, constant digital stimulation has become the norm. But this
+                            constant connectivity comes at a cost. Studies show that unplugging for just a few hours a
+                            day can significantly reduce stress hormones and improve mental clarity. A digital detox
+                            isn't about completely abandoning technology—it's about creating intentional boundaries to
+                            protect your mental health and productivity.</p>
+
+                        <h2>The Hidden Costs of Constant Connectivity</h2>
+                        <p>Every notification, like, and message triggers a dopamine release in your brain, creating an
+                            addiction-like response. This constant stimulation can lead to increased anxiety, poor sleep
+                            quality, and reduced ability to focus. Research from the University of California found that
+                            even the mere presence of a smartphone reduces cognitive capacity.</p>
+
+                        <h2>Cortisol and Stress Response</h2>
+                        <p>Chronic exposure to digital stimuli keeps your body's stress response activated. Cortisol
+                            levels remain elevated, leading to fatigue, mood swings, and weakened immune function. A
+                            digital detox allows your nervous system to reset, reducing cortisol and promoting
+                            relaxation.</p>
+
+                        <h2>Improved Sleep Quality</h2>
+                        <p>Blue light from screens suppresses melatonin production, making it harder to fall asleep and
+                            stay asleep. Creating a "tech curfew" an hour before bed can significantly improve sleep
+                            quality and help regulate your circadian rhythm.</p>
+
+                        <h2>Enhanced Focus and Productivity</h2>
+                        <p>Multitasking between devices and tasks reduces productivity by up to 40%. Digital detox
+                            periods allow for deep work sessions where you can fully engage with complex tasks without
+                            the constant pull of notifications.</p>
+
+                        <h2>Stronger Real-World Connections</h2>
+                        <p>Excessive screen time can diminish the quality of face-to-face interactions. Taking breaks
+                            from digital communication helps you be more present in conversations and build deeper
+                            relationships with those around you.</p>
+
+                        <h2>How to Start Your Digital Detox</h2>
+                        <ul>
+                            <li>Begin with small changes: Try a 1-hour detox in the evening</li>
+                            <li>Designate tech-free zones in your home</li>
+                            <li>Use apps that track and limit screen time</li>
+                            <li>Replace scrolling with mindful activities like reading or walking</li>
+                            <li>Set specific times for checking emails and social media</li>
+                        </ul>
+
+                        <p>Start small and build gradually. Even 2 hours of screen-free time per day can make a
+                            noticeable difference in your stress levels and mental clarity. Remember, the goal isn't
+                            perfection—it's creating a healthier relationship with technology that serves your
+                            well-being rather than controls it.</p>
+
+                        <p>Have you tried a digital detox? What challenges did you face, and what benefits did you
+                            notice?</p>
+                    </article>
+                </div>
+                <div class="uk-width-1-3@m">
+                    <div class="uk-card uk-card-default uk-card-body">
+                        <h3 class="uk-card-title">Related Articles</h3>
+                        <ul class="uk-list uk-list-divider">
+                            <li><a href="post-detail.html">5 Ways to Beat Exam Anxiety</a></li>
+                            <li><a href="study-sanctuary.html">The Perfect Study Sanctuary</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-section uk-section-secondary">
+        <div class="uk-container uk-text-center">
+            <h3>Ready to take control of your mental health?</h3>
+            <p>Explore our services and find the support you need.</p>
+            <a href="Home.html#our-services" uk-scroll class="uk-button uk-button-primary">Our Services</a>
+        </div>
+    </div>
+    <div id="my-sidebar" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Mental Health Resources</li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span> Therapy</a></li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Support Groups</a>
+                </li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: info"></span>About</a></li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span>Our Service</a>
+                </li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: receiver"></span>Contact Us</a></li>
+
+                </li>
+                <li class="uk-nav-divider"></li>
+                <li><a href="#">Emergency Contact</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+
+</html>

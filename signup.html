@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Perfect Study Sanctuary - The Clear Sky Journal</title>
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <style>
+        /* Consistent with Blog.html styles */
+        .uk-navbar-container {
+            background: rgba(27, 38, 59, 0.9) !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .uk-navbar-nav>li>a,
+        .uk-navbar-item,
+        .uk-navbar-item a,
+        .uk-logo {
+            color: #FFFFFF !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 1. The Background of the sidebar */
+        .uk-offcanvas-bar {
+            background: #1B263B !important;
+            /* Your Deep Navy */
+            padding: 40px 30px;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 2. The Navigation Links */
+        .uk-offcanvas-bar .uk-nav-default>li>a {
+            color: #E0E1DD !important;
+            /* Your Ice Blue */
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            padding: 10px 0;
+        }
+
+        /* 3. The Hover & Active State */
+        .uk-offcanvas-bar .uk-nav-default>li>a:hover,
+        .uk-offcanvas-bar .uk-nav-default>li.uk-active>a {
+            color: #FFFFFF !important;
+            padding-left: 10px;
+            /* Subtle slide effect on hover */
+        }
+
+        /* 4. The Close Button (X icon) */
+        .uk-offcanvas-close {
+            color: #E0E1DD !important;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* 5. The Divider (If you use headers in your menu) */
+        .uk-offcanvas-bar .uk-nav-header {
+            color: rgba(224, 225, 222, 0.5) !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(224, 225, 222, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .uk-icon {
+            color: #FFFFFF !important;
+        }
+
+        .uk-navbar-sticky {
+            background: rgba(27, 38, 59, 0.8) !important;
+            backdrop-filter: blur(8px);
+        }
+
+        .uk-navbar-container .uk-navbar-container {
+            position: relative;
+            z-index: 999;
+            background: transparent !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container">
+            <div uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item uk-logo" href="Home.html" aria-label="Back to Home">
+                        <img src="Images/Clear_Sky-removebg-preview.png" alt="Company Name Logo"
+                            style="height: 90px; width: auto;">
+                    </a>
+                </div>
+                <div class="uk-navbar-center">
+                    <div class="uk-navbar-item">
+                        <a href="#" uk-toggle="target: #my-sidebar">
+                            <span class="uk-icon uk-margin-xsmall-right" uk-icon="icon: star"></span>Features
+                        </a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Home.html">Home</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="About.html">About</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Home.html#our-services" uk-scroll>Our Services</a>
+                    </div>
+                    <div class="uk-navbar-item">
+                        <a href="Blog.html">Blog</a>
+                    </div>
+                </div>
+                <div class="uk-navbar-right">
+                    <div class="uk-navbar-item">
+                        <form action="javascript:void(0)">
+                            <input class="uk-input uk-form-width-small" type="text" placeholder="Input"
+                                aria-label="Input" style="border-radius: 5px;">
+                            <button class="uk-button uk-button-default" style="border-radius: 5px;">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="uk-section uk-section-muted uk-flex uk-flex-middle" uk-height-viewport>
+        <div class="uk-container">
+            <div class="uk-width-large uk-margin-auto">
+
+                <div class="uk-card uk-card-default uk-card-body uk-border-rounded uk-box-shadow-large">
+                    <div class="uk-text-center uk-margin-bottom">
+                        <h2 style="color: #1B263B; font-weight: 700;">Start Your Journey</h2>
+                        <p class="uk-text-meta">Tell us a bit about yourself so we can help.</p>
+                    </div>
+
+                    <form>
+                        <div class="uk-margin">
+                            <label class="uk-form-label" style="color: #415A77;">Full Name</label>
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: user"></span>
+                                <input class="uk-input uk-border-rounded" type="text" placeholder="John Doe">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" style="color: #415A77;">University Email</label>
+                            <div class="uk-inline uk-width-1-1">
+                                <span class="uk-form-icon" uk-icon="icon: mail"></span>
+                                <input class="uk-input uk-border-rounded" type="email"
+                                    placeholder="name@university.edu">
+                            </div>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label class="uk-form-label" style="color: #415A77;">What's on your mind?</label>
+                            <select class="uk-select uk-border-rounded">
+                                <option>Exam Anxiety</option>
+                                <option>Daily Stress</option>
+                                <option>Study Productivity</option>
+                                <option>Just want to talk</option>
+                            </select>
+                        </div>
+
+                        <div class="uk-margin">
+                            <label><input class="uk-checkbox" type="checkbox" checked> I agree to the <a
+                                    href="#">Privacy Policy</a></label>
+                        </div>
+
+                        <div class="uk-margin">
+                            <button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded"
+                                style="background-color: #1B263B; height: 50px;">
+                                Create My Sanctuary
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="uk-text-center uk-margin-top">
+                        <a href="Home.html" class="uk-button uk-button-text" style="color: #415A77;">Back to Home</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="my-sidebar" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Mental Health Resources</li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span> Therapy</a></li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Support Groups</a>
+                </li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: info"></span>About</a></li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: lifesaver"></span>Our Service</a>
+                </li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: receiver"></span>Contact Us</a></li>
+
+                </li>
+                <li class="uk-nav-divider"></li>
+                <li><a href="#">Emergency Contact</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+</body>
+
+</html>

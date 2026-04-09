@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My First UIkit Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <link rel="icon" type="image/x-icon" href="Images/Clear_Sky-removebg-preview.png" />
+    <style>
+        /* 1. Remove the background and the border/shadow from the navbar */
+        .uk-navbar-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
+        .uk-navbar-nav>li>a,
+        .uk-navbar-item,
+        .uk-logo {
+            color: #fff !important;
+        }
+
+        /* Mobile */
+        @media (max-width: 959px) {
+            .uk-navbar-container {
+                background: rgba(0, 0, 0, 0.7);
+
+            }
+
+
+        }
+
+
+
+        /* Styling the arrows */
+        .uk-slidenav {
+            color: #E0E1DD !important;
+            /* Ice Blue */
+            background: rgba(27, 38, 59, 0.2);
+            /* Very faint Navy background circle */
+            padding: 10px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        /* Styling the Dots */
+        .uk-dotnav>*>* {
+            background-color: rgba(65, 90, 119, 0.4);
+            /* Faded Navy Blue */
+            border: 1px solid #415A77;
+            transition: 0.3s ease;
+        }
+
+        .uk-dotnav>.uk-active>* {
+            background-color: #E0E1DD !important;
+            /* Ice Blue for the active slide */
+            transform: scale(1.3);
+            /* Makes the active dot slightly bigger */
+        }
+
+        /* Styling the Arrows */
+        .uk-slidenav {
+            background: rgba(27, 38, 59, 0.3);
+            /* Subtle dark circle background */
+            padding: 15px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        /* Styling for Part 2 Footer Navigation */
+        .footer-heading {
+            color: #E0E1DD !important;
+            /* Ice Blue */
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .uk-navbar-right {
+            margin-right: 10px;
+        }
+
+
+
+
+        .uk-heading-medium {
+            font-size: 2rem;
+        }
+
+        .uk-text-lead {
+            font-size: 1.1rem;
+        }
+
+
+        .footer-link {
+            color: rgba(224, 225, 222, 0.7) !important;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #FFFFFF !important;
+            padding-left: 5px;
+            /* Subtle slide effect on hover */
+        }
+
+        /* Social Media Circle Buttons */
+        .uk-icon-button {
+            background-color: #E0E1DD;
+            color: #1B263B !important;
+            border: none;
+
+            transition: transform 0.3s;
+        }
+
+
+        .uk-icon-button:hover {
+            background-color: #415A77;
+            color: #FFFFFF !important;
+            transform: translateY(-3px);
+        }
+
+        .uk-slidenav:hover {
+            background: rgba(27, 38, 59, 0.6);
+            /* Darkens on hover */
+            color: #FFFFFF !important;
+        }
+
+        /* Make the card edges softer and add a professional shadow */
+        .uk-card {
+            border-radius: 20px !important;
+            box-shadow: 0 15px 35px rgba(27, 38, 59, 0.1) !important;
+            border: 1px solid rgba(224, 225, 222, 0.5);
+            /* Ice Blue border */
+        }
+
+        /* Ensure the image inside also follows the curve */
+        .uk-card-media-top {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        /* 1. The Background of the sidebar */
+        .uk-offcanvas-bar {
+            background: #1B263B !important;
+            /* Your Deep Navy */
+            padding: 40px 30px;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 2. The Navigation Links */
+        .uk-offcanvas-bar .uk-nav-default>li>a {
+            color: #E0E1DD !important;
+            /* Your Ice Blue */
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: 0.3s ease;
+            padding: 10px 0;
+        }
+
+        /* 3. The Hover & Active State */
+        .uk-offcanvas-bar .uk-nav-default>li>a:hover,
+        .uk-offcanvas-bar .uk-nav-default>li.uk-active>a {
+            color: #FFFFFF !important;
+            padding-left: 10px;
+            /* Subtle slide effect on hover */
+        }
+
+        /* 4. The Close Button (X icon) */
+        .uk-offcanvas-close {
+            color: #E0E1DD !important;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* 5. The Divider (If you use headers in your menu) */
+        .uk-offcanvas-bar .uk-nav-header {
+            color: rgba(224, 225, 222, 0.5) !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid rgba(224, 225, 222, 0.1);
+            margin-bottom: 15px;
+        }
+
+        .uk-slidenav:hover {
+            color: #FFFFFF !important;
+            background: rgba(27, 38, 59, 0.5);
+            /* Darkens on hover */
+        }
+
+        /* Ensure profile pictures are perfect circles and have a nice border */
+        .uk-border-circle {
+            border: 3px solid #E0E1DD;
+            /* Our Ice Blue color */
+            object-fit: cover;
+            /* Prevents the face from stretching */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Make the quote text feel more 'premium' */
+        .uk-text-large {
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        /* Custom Card Styling */
+        .uk-card {
+            border-radius: 25px !important;
+            /* Extra curved for a friendly look */
+            box-shadow: 0 20px 40px rgba(27, 38, 59, 0.15) !important;
+            /* Soft Navy shadow */
+            border: none;
+        }
+
+        /* Ensure the image container also has rounded top corners */
+        .uk-card-media-top {
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+        }
+
+        .uk-navbar-item {
+            color: white;
+        }
+
+        .uk-navbar-item a {
+            color: white !important;
+        }
+
+        .uk-navbar-item:hover {
+            color: #007bff;
+        }
+
+        .uk-section {
+            background-color: #e9ecef;
+        }
+
+        .uk-heading-medium {
+            color: #343a40;
+            font-size: 4rem;
+        }
+
+        .uk-text-lead {
+            color: #6c757d;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+
+        <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar
+            uk-sticky="show-on-up: true; animation: uk-animation-slide-top">
+
+            <div class="uk-navbar-left">
+                <a class="uk-navbar-item uk-logo" href="Home.html">
+                    <img src="Images/Clear_Sky-removebg-preview.png" style="height:60px" ;>
+                </a>
+            </div>
+
+            <!-- Desktop menu -->
+            <div class=" uk-navbar-center uk-visible@m">
+                <ul class="uk-navbar-nav">
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="Home.html#our-services" uk-scroll>Services</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Mobile toggle -->
+            <div class="uk-navbar-right">
+                <a class="uk-navbar-toggle uk-hidden@m" uk-toggle="target: #offcanvas-nav">
+                    <span uk-navbar-toggle-icon></span>
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+    <div id="offcanvas-nav" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-default">
+                <li><a href="#" uk-toggle="target: #my-sidebar"><span class="uk-icon uk-margin-xsmall-right"
+                            uk-icon="icon: star"></span>Features</a></li>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Home.html#our-services" uk-scroll>Our Services</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="uk-section uk-light uk-flex uk-flex-middle uk-position-relative" style="min-height:100dvh">
+
+        <!-- Background image -->
+        <img src="Images/Night-study.jpg" alt="Two women in therapy" uk-cover>
+
+        <!-- Overlay -->
+
+        <div class="uk-position-cover" style="background:rgba(27,38,59,0.7);"></div>
+        <!-- Content -->
+        <div class="uk-container uk-position-relative uk-text-center">
+            <h1 class="uk-heading-medium">Peace of Mind</h1>
+            <p class="uk-text-lead">Find the support you need, whenever you need it.</p>
+            <a href="signup.html" class="uk-button uk-button-primary uk-border-rounded">
+                <b>Get Started</b>
+            </a>
+        </div>
+    </div>
+
+    <div class="uk-section">
+        <div class="uk-container">
+            <div class="uk-grid-large uk-child-width-1-2@m uk-flex-middle" uk-grid>
+
+                <div uk-scrollspy="cls: uk-animation-slide-left; repeat: true; delay: 200">
+                    <img src="Images/Mental Health Coach.jfif" alt="Support Session"
+                        class="uk-border-rounded uk-box-shadow-large">
+                </div>
+
+                <div class="uk-flex-column uk-flex-between">
+                    <h3 class="uk-heading-small" style="color: #1B263B;">Sometimes all we need is a push in the right
+                        direction </h3>
+                    <p class="uk-text-lead">Mental health is just as important as physical health. We provide the tools
+                        you need to navigate life's challenges with confidence.</p>
+                    <p>Our platform connects you with resources tailored to your specific needs, focusing on clarity,
+                        support, and growth.</p>
+                    <a href="About.html" class="uk-button uk-button-primary"
+                        style="background-color: #415A77;border-radius: 5px;">Learn More</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div id="our-services" class="uk-position-relative uk-visible-toggle uk-slideshow" tabindex="-1"
+        uk-slideshow="animation: kenburns;kenburns: 1.2; autoplay: true; autoplay-interval: 8000; min-height: 600; max-height: 800">
+        <h3 class="uk-heading-small" style="color: #415A77;text-align: center;padding-top: 30px;">Our Services</h3>
+        <ul class="uk-slideshow-items">
+
+            <li>
+                <div class="uk-flex uk-flex-column uk-flex-center uk-height-1-1">
+
+                    <div class="uk-card uk-card-default uk-card-hover uk-border-rounded uk-overflow-hidden"
+                        style="width: 80%; margin: 0 auto; background: #FFFFFF;">
+
+                        <div id="mutual"
+                            class="uk-card-media-top uk-position-relative uk-height-large uk-overflow-hidden">
+                            <img src="Images/Hand.jpg" alt="Hands" uk-cover>
+                        </div>
+
+                        <div class="uk-card-body uk-text-center">
+                            <h3 class="uk-card-title" style="color: #1B263B;">Mutual Support Meetings</h3>
+                            <p style="color: #415A77;">Participants share experiences and provide support to strengthen
+                                their commitment to recover.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+
+            <li>
+                <div class="uk-flex uk-flex-column uk-flex-center uk-height-1-1">
+
+                    <div class="uk-card uk-card-default uk-card-hover uk-border-rounded uk-overflow-hidden"
+                        style="width: 80%; margin: 0 auto; background: #FFFFFF;">
+
+
+                        <div id="addiction"
+                            class="uk-card-media-top uk-position-relative uk-height-large uk-overflow-hidden">
+                            <img src="Images/Hugging.jfif" alt="Hugging" uk-cover>
+
+                        </div>
+
+                        <div class="uk-card-body uk-text-center">
+                            <h3 class="uk-card-title" style="color: #1B263B;">Addiction Intervention</h3>
+                            <p style="color: #415A77;">
+                                If you have a loved one who is spiraling due to addiction, we can
+                                help you arrange an intervention to help them.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="uk-flex uk-flex-column uk-flex-center uk-height-1-1">
+
+                    <div class="uk-card uk-card-default uk-card-hover uk-border-rounded uk-overflow-hidden"
+                        style="width: 80%; margin: 0 auto; background: #FFFFFF;">
+
+                        <div id="addiction-recovery"
+                            class="uk-card-media-top uk-position-relative uk-height-large uk-overflow-hidden">
+                            <img src="Images/Therapy.jfif" alt="Therapy" uk-cover>
+                        </div>
+
+                        <div class="uk-card-body uk-text-center">
+                            <h3 class="uk-card-title" style="color: #1B263B;">Addiction Recovery Sponsor</h3>
+                            <p style="color: #415A77;">Senior recovering members of our community volunteer their time
+                                as sponsors to mentor new recoverees.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-large" href="#"
+            uk-slidenav-previous uk-slideshow-item="previous" style="color: #E0E1DD;"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-large" href="#"
+            uk-slidenav-next uk-slideshow-item="next" style="color: #E0E1DD;"></a>
+
+        <div class="uk-position-bottom-center uk-position-small">
+            <ul class="uk-dotnav uk-flex-center">
+                <li uk-slideshow-item="0"><a href="#">Slide 1</a></li>
+                <li uk-slideshow-item="1"><a href="#">Slide 2</a></li>
+                <li uk-slideshow-item="2"><a href="#">Slide 3</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="uk-section">
+        <div class="uk-container">
+            <div class="uk-grid-large uk-child-width-1-2@m uk-flex-middle" uk-grid>
+
+                <div class="uk-flex-column uk-flex-between">
+                    <h3 class="uk-heading-small" style="color: #1B263B;">A strong support system make things happen
+                    </h3>
+                    <p class="uk-text-lead">Just like how we provide you with a solid support system, our community does
+                        the same for us. We are proud to partner with the following organizations:
+
+                    <ul>
+                        <li>Curtin Healthcare Services</li>
+                        <li>Mocharinto Food Corporation</li>
+                        <li>Excello Fitness</li>
+                        <li>Namaste Savasana</li>
+                        <li>Grover's Green Grocer</li>
+
+                    </ul>
+                    </p>
+                    <p>Our platform connects you with resources tailored to your specific needs, focusing on clarity,
+                        support, and growth.</p>
+                    <a href="About.html" class="uk-button uk-button-primary"
+                        style="background-color: #415A77; border-radius: 5px;">Learn More</a>
+                </div>
+
+                <div uk-scrollspy="cls: uk-animation-slide-right; repeat: true; delay: 200">
+                    <img src="Images/Best Friends Hugging & Smiling – Outdoor Golden Hour Celebration.jfif"
+                        alt="Support Session image" class="uk-border-rounded uk-box-shadow-large"
+                        style="height: 690px;">
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="uk-section uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-grid-large uk-flex-middle" uk-grid>
+
+                <div class="uk-width-2-5@m">
+                    <h1 class="uk-heading-small" style="color: #1B263B; font-weight: 800; line-height: 1.2;">
+                        What Our <span style="color: #415A77;">Community</span> Says About Us
+                    </h1>
+                    <p class="uk-text-lead">See what our members have to say, real stories from students finding their
+                        peace.</p>
+                </div>
+
+                <div class="uk-width-3-5@m">
+                    <div uk-slideshow="autoplay: true; animation: slide; autoplay-interval: 5000">
+
+                        <ul class="uk-slideshow-items">
+                            <li>
+                                <div class="uk-panel">
+                                    <i class="uk-icon uk-icon-quote-right uk-margin-small-bottom"
+                                        style="color: #E0E1DD;"></i>
+                                    <p class="uk-text-large" style="font-style: italic; color: #1B263B;">
+                                        "The resources here helped me manage my exam stress when I felt completely
+                                        overwhelmed. It's a lifesaver for any CS student."
+                                    </p>
+                                    <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img class="uk-border-circle" width="60" height="60"
+                                                src="Images/Profile 3.jpg" alt="Profile">
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-margin-remove" style="color: #1B263B;">Sarah Jenkins</h4>
+                                            <p class="uk-text-meta uk-margin-remove">Final Year Student</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+
+                            <li>
+                                <div class="uk-panel">
+                                    <p class="uk-text-large" style="font-style: italic; color: #1B263B;">
+                                        "Finally, a platform that understands the mental toll of university life. The
+                                        interface is so calming."
+                                    </p>
+                                    <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img class="uk-border-circle" width="60" height="60"
+                                                src="Images/Profile 1.jpg" alt="Profile">
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-margin-remove" style="color: #1B263B;">David Okafor</h4>
+                                            <p class="uk-text-meta uk-margin-remove">Engineering Major</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="uk-panel">
+                                    <p class="uk-text-large" style="font-style: italic; color: #1B263B;">
+                                        "The intervention guidance and support you provided is the reason why I have
+                                        been sober for seven months today."
+
+
+                                    </p>
+                                    <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img class="uk-border-circle" width="60" height="60"
+                                                src="Images/Profile 2.jpg" alt="Profile">
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-margin-remove" style="color: #1B263B;"> Nicholas N.</h4>
+                                            <p class="uk-text-meta uk-margin-remove">Computer Science Major</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="uk-panel">
+                                    <p class="uk-text-large" style="font-style: italic; color: #1B263B;">
+                                        "I appreciate the freedom we get in sharing our stories and worries. Feeling the
+                                        support of our group helps strengthen my resolve to continue my recovery
+                                        journey."
+
+
+
+                                    </p>
+                                    <div class="uk-grid-small uk-flex-middle uk-margin-top" uk-grid>
+                                        <div class="uk-width-auto">
+                                            <img class="uk-border-circle" width="60" height="60"
+                                                src="Images/Profile 4.jpg" alt="Profile">
+                                        </div>
+                                        <div class="uk-width-expand">
+                                            <h4 class="uk-margin-remove" style="color: #1B263B;"> Elliot B.</h4>
+                                            <p class="uk-text-meta uk-margin-remove">Agricultural Science Major</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <ul class="uk-slideshow-nav uk-dotnav uk-margin-top"></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div id="my-sidebar" uk-offcanvas="mode: push; overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-nav-header">Mental Health Resources</li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: heart"></span> Therapy</a></li>
+                <li><a href="Blog.html"><span class="uk-margin-small-right" uk-icon="icon: users"></span> Support
+                        Groups</a>
+                </li>
+                <li><a href="About.html"><span class="uk-margin-small-right" uk-icon="icon: info"></span>About</a></li>
+                <li><a href="Home.html#our-services"><span class="uk-margin-small-right"
+                            uk-icon="icon: lifesaver"></span>Our Service</a>
+                </li>
+                <li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: receiver"></span>Contact Us</a></li>
+
+                </li>
+                <li class="uk-nav-divider"></li>
+                <li><a href="Contact.html"><span class="uk-margin-small-right" uk-icon="icon: receiver"></span>Contact
+                        Us</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="uk-section uk-section-xsmall" style="background-color: #f8f9fa; border-top: 1px solid #e5e5e5;">
+        <div class="uk-container">
+            <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                <div class="uk-width-expand@m">
+                    <h2 class="uk-margin-remove" style="color: #1B263B; font-weight: 700;">Got a problem? Tell us about
+                        it</h2>
+                    <p class="uk-text-meta uk-margin-remove" style="color: rgba(0,0,0,0.5);">Even if it's a small issue
+                    </p>
+                </div>
+                <div class="uk-width-auto@m">
+                    <a href="signup.html" class="uk-button uk-button-primary uk-border-rounded"
+                        style="background-color: #415A77;">Get Started</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-section uk-section-large" style="background-color: #415A77; color: #FFFFFF;">
+        <div class="uk-container">
+            <div class="uk-grid-large uk-child-width-1-4@m" uk-grid>
+                <div>
+                    <h4 class="footer-heading">Clear Sky FT</h4>
+                    <hr class="uk-divider-small">
+                    <p>Clear Sky Family Therapy is a comprehensive approach to treating family dynamics and improving
+                        communication within households.</p>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Services</h4>
+                    <hr class="uk-divider-small">
+                    <ul class="uk-list">
+                        <li><a href="Home.html#mutual" uk-scroll class="footer-link">Mutual Support Meetings</a></li>
+                        <li><a href="Home.html#addiction" uk-scroll class="footer-link">Addiction Intervention</a></li>
+                        <li><a href="Home.html#addiction-recovery" uk-scroll class="footer-link">Addiction Recovery</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <hr class="uk-divider-small">
+                    <ul class="uk-list">
+                        <li><a href="Home.html" class="footer-link">Home</a></li>
+                        <li><a href="About.html" class="footer-link">About</a></li>
+                        <li><a href="Home.html#our-services" uk-scroll class="footer-link">Our Services</a></li>
+                        <li><a href="Blog.html" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Contact</h4>
+                    <hr class="uk-divider-small">
+                    <p>123 Anywhere St., Any City, ST 12345
+                        123-456-7890
+                        who@reallygreatsite.com
+                        @whoreallygreatsite</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-section uk-section-xsmall" style="background-color: #f8f9fa;">
+        <div class="uk-container">
+            <div class="uk-grid-medium uk-flex-middle" uk-grid>
+                <div class="uk-width-expand@m">
+                    <a class="uk-logo" href="Home.html" style="color: #1B263B; font-weight: 700;"> <img
+                            src="Images/Clear_Sky-removebg-preview.png" alt="Company Name Logo"
+                            style="height: 100px; width: auto;"></a>
+                    <p class="uk-text-small uk-margin-remove" style="color: #415A77;">
+                        &copy; Clear sky, All rights reserved
+                    </p>
+                </div>
+
+                <div class="uk-width-auto@m">
+                    <div class="uk-grid-small" uk-grid>
+                        <div><a href="#" class="uk-icon-button" uk-icon="facebook"></a></div>
+                        <div><a href="#" class="uk-icon-button" uk-icon="twitter"></a></div>
+                        <div><a href="#" class="uk-icon-button" uk-icon="instagram"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+
+</body>
+
+</html>
