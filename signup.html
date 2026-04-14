@@ -6,12 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The Perfect Study Sanctuary - The Clear Sky Journal</title>
     <link rel="stylesheet" href="css/uikit.min.css">
+    <link rel="icon" type="image/x-icon" href="Images/Clear_Sky-removebg-preview.png" />
     <style>
         /* Consistent with Blog.html styles */
         .uk-navbar-container {
             background: rgba(27, 38, 59, 0.9) !important;
             box-shadow: none !important;
             border: none !important;
+        }
+
+
+        /* Mobile */
+        @media (max-width: 959px) {
+            .uk-navbar-container {
+                background: rgba(0, 0, 0, 0.7);
+
+            }
+
+
+        }
+
+        .uk-navbar-right {
+            margin-right: 10px;
         }
 
         .uk-navbar-nav>li>a,
@@ -92,39 +108,31 @@
                             style="height: 90px; width: auto;">
                     </a>
                 </div>
-                <div class="uk-navbar-center">
-                    <div class="uk-navbar-item">
-                        <a href="#" uk-toggle="target: #my-sidebar">
-                            <span class="uk-icon uk-margin-xsmall-right" uk-icon="icon: star"></span>Features
-                        </a>
-                    </div>
-                    <div class="uk-navbar-item">
-                        <a href="Home.html">Home</a>
-                    </div>
-                    <div class="uk-navbar-item">
-                        <a href="About.html">About</a>
-                    </div>
-                    <div class="uk-navbar-item">
-                        <a href="Home.html#our-services" uk-scroll>Our Services</a>
-                    </div>
-                    <div class="uk-navbar-item">
-                        <a href="Blog.html">Blog</a>
-                    </div>
-                </div>
+
+                <!-- Mobile toggle -->
                 <div class="uk-navbar-right">
-                    <div class="uk-navbar-item">
-                        <form action="javascript:void(0)">
-                            <input class="uk-input uk-form-width-small" type="text" placeholder="Input"
-                                aria-label="Input" style="border-radius: 5px;">
-                            <button class="uk-button uk-button-default" style="border-radius: 5px;">Search</button>
-                        </form>
-                    </div>
+                    <a class="uk-navbar-toggle uk-hidden@m" uk-toggle="target: #offcanvas-nav">
+                        <span uk-navbar-toggle-icon></span>
+                    </a>
+
                 </div>
+
             </div>
         </nav>
     </div>
 
-
+    <div id="offcanvas-nav" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+            <ul class="uk-nav uk-nav-default">
+                <li><a href="#" uk-toggle="target: #my-sidebar"><span class="uk-icon uk-margin-xsmall-right"
+                            uk-icon="icon: star"></span>Features</a></li>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Home.html#our-services" uk-scroll>Our Services</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="uk-section uk-section-muted uk-flex uk-flex-middle" uk-height-viewport>
         <div class="uk-container">
             <div class="uk-width-large uk-margin-auto">
