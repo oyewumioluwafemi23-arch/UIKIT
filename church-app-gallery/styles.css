@@ -1,0 +1,316 @@
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* ===== PAGE CONTENT ===== */
+.website-content {
+  padding: 20px 16px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.website-content h1 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #1a1a2e;
+}
+
+.website-content p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+/* ===== NAVBAR ===== */
+.uk-navbar-container {
+  background: #1a1a2e !important;
+}
+
+.uk-navbar-container .uk-logo {
+  color: #fff !important;
+  font-size: 18px;
+}
+
+.uk-navbar-nav>li>a {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* ============================================
+    CROPPED IMAGE PREVIEW (PORTRAIT CARD)
+    ============================================ */
+.image-section {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ddd;
+}
+
+.image-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+/* ===== FLOATING VIEW BUTTON ===== */
+.view-full-btn {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.view-full-btn:hover,
+.view-full-btn:active {
+  background: rgba(0, 0, 0, 0.85);
+  transform: scale(1.1);
+}
+
+.view-full-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+/* ============================================
+    FULL-SCREEN LANDSCAPE IMAGE VIEWER
+    ============================================ */
+.image-viewer-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: #000;
+  z-index: 99999;
+}
+
+.image-viewer-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOverlayIn 0.35s ease;
+}
+
+@keyframes fadeOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== ROTATED LANDSCAPE CONTAINER ===== */
+.viewer-landscape-container {
+  width: 100vh;
+  height: 100vw;
+  transform: rotate(90deg);
+  transform-origin: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+@media screen and (orientation: landscape) {
+  .viewer-landscape-container {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    transform: none;
+  }
+}
+
+/* ===== EXIT BUTTON ===== */
+.viewer-exit-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.viewer-exit-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0.9);
+}
+
+/* ===== IMAGE COUNTER ===== */
+.image-counter {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  z-index: 50;
+}
+
+/* ===== HORIZONTAL SCROLL AREA ===== */
+.viewer-scroll-area {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  background: #000;
+  display: flex;
+  align-items: center;
+}
+
+.viewer-scroll-area::-webkit-scrollbar {
+  display: none;
+}
+.viewer-scroll-area {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.viewer-scroll-area img.panoramic-img {
+  height: 100%;
+  width: auto;
+  max-width: none !important;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, #ff6b35, #f7c948);
+  width: 0%;
+  transition: width 0.1s;
+  z-index: 50;
+}
+
+/* ===== SCROLL INDICATOR HINT ===== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 8px 20px;
+  border-radius: 20px;
+  z-index: 50;
+  transition: opacity 0.5s;
+  pointer-events: none;
+}
+
+.scroll-indicator.hidden {
+  opacity: 0;
+}
+
+.scroll-indicator span {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.scroll-indicator .arrow-anim {
+  display: inline-block;
+  animation: bounceRight 1.2s infinite alternate;
+  color: #f7c948;
+  font-size: 14px;
+}
+
+.scroll-indicator .arrow-anim.left {
+  animation: bounceLeft 1.2s infinite alternate;
+}
+
+@keyframes bounceRight {
+  from { transform: translateX(0); }
+  to { transform: translateX(4px); }
+}
+@keyframes bounceLeft {
+  from { transform: translateX(0); }
+  to { transform: translateX(-4px); }
+}
+
+/* ===== LOCK BODY WHEN VIEWER OPEN ===== */
+body.viewer-open {
+  overflow: hidden !important;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== SECTION DIVIDER ===== */
+.section-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 24px 0;
+}
+
+/* ===== UIkit CARD OVERRIDES ===== */
+.uk-card.uk-card-default {
+  border-radius: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 360px) {
+  .view-full-btn {
+    width: 44px;
+    height: 44px;
+  }
+  .view-full-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+}

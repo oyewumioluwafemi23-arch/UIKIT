@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Mobile Image Viewer — UIkit</title>
+
+  <!-- ===== UIkit CSS CDN ===== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/css/uikit.min.css" />
+  
+  <!-- ===== Custom Styles ===== -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ============================================
+       NAVBAR (UIkit)
+       ============================================ -->
+  <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+      <a class="uk-navbar-item uk-logo" href="#">
+        <span uk-icon="icon: bolt; ratio: 1.2"></span> Panoramic Viewer
+      </a>
+    </div>
+    <div class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
+        <li><a href="#"><span uk-icon="icon: menu"></span></a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       MAIN WEBSITE CONTENT
+       ============================================ -->
+  <div class="website-content" id="websiteContent">
+
+    <!-- Header -->
+    <div class="uk-margin-medium-bottom">
+      <h1 class="uk-heading-small uk-text-bold uk-margin-remove-bottom">📷 Photo Gallery</h1>
+      <p class="uk-text-meta uk-margin-small-top">
+        Tap the <span class="uk-label uk-label-success" style="font-size:11px;">🔍 View</span> icon on any cropped image to open it in full-screen landscape and explore the full panorama.
+      </p>
+    </div>
+
+    <!-- ===== IMAGE 1 CARD (HOUSE) ===== -->
+    <div class="uk-card uk-card-default uk-card-hover uk-margin-medium-bottom">
+      <div class="uk-card-header" style="padding: 12px 16px;">
+        <h3 class="uk-card-title uk-margin-remove-bottom" style="font-size:16px;">
+          <span uk-icon="icon: home; ratio: 0.9"></span> Modern House
+        </h3>
+        <p class="uk-text-meta uk-margin-remove-top">Wide Panoramic View</p>
+      </div>
+
+      <div class="uk-card-body" style="padding: 0 16px;">
+        <div class="image-section">
+          <!-- Portrait preview -->
+          <img src="images/house.jpg" alt="Modern House Portrait Preview">
+          <button class="view-full-btn" onclick="openViewer(0)" aria-label="View full landscape image">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ===== IMAGE 2 CARD (LANDSCAPE) ===== -->
+    <div class="uk-card uk-card-default uk-card-hover uk-margin-medium-bottom">
+      <div class="uk-card-header" style="padding: 12px 16px;">
+        <h3 class="uk-card-title uk-margin-remove-bottom" style="font-size:16px;">
+          <span uk-icon="icon: image; ratio: 0.9"></span> Beautiful Landscape
+        </h3>
+        <p class="uk-text-meta uk-margin-remove-top">Wide Panoramic View</p>
+      </div>
+
+      <div class="uk-card-body" style="padding: 0 16px;">
+        <div class="image-section">
+          <!-- Portrait preview -->
+          <img src="images/land.jpg" alt="Landscape Portrait Preview">
+          <button class="view-full-btn" onclick="openViewer(1)" aria-label="View full landscape image">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END website-content -->
+
+
+  <!-- ============================================
+       FULL-SCREEN LANDSCAPE IMAGE VIEWER OVERLAY
+       ============================================ -->
+  <div class="image-viewer-overlay" id="imageViewer">
+    <div class="viewer-landscape-container">
+      
+      <!-- Exit Button -->
+      <button class="viewer-exit-btn" onclick="closeViewer()" aria-label="Close viewer">✕</button>
+      
+      <!-- Image Counter -->
+      <div class="image-counter" id="imageCounter">Image 1 of 2</div>
+
+      <!-- Scrollable Image Area -->
+      <div class="viewer-scroll-area" id="scrollArea">
+        <!-- Image dynamically injected here by JS -->
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="scroll-progress-bar" id="progressBar"></div>
+
+      <!-- Scroll Hint -->
+      <div class="scroll-indicator" id="scrollIndicator">
+        <span class="arrow-anim left">←</span>
+        <span>Slide to explore</span>
+        <span class="arrow-anim">→</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== UIkit JS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.13/dist/js/uikit-icons.min.js"></script>
+
+  <!-- ===== Custom JS ===== -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
